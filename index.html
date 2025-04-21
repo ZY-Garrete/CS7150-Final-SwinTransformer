@@ -3,11 +3,11 @@
 
 <head>
   <title>A Comparative Study of CNNs and Swin Transformers on Traffic Sign Classification</title>
-  <meta property="og:title" content=Your Project Name" />
-  <meta name="twitter:title" content="Your Project Name" />
-  <meta name="description" content="Your project about your cool topic described right here." />
-  <meta property="og:description" content="Your project about your cool topic described right here." />
-  <meta name="twitter:description" content="Your project about your cool topic described right here." />
+  <meta property="og:title" content=  Swin vs CNNs Transformers on Traffic Signs" />
+  <meta name="twitter:title" content="  Swin vs CNNs Transformers on Traffic Signs" />
+  <meta name="description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
+  <meta property="og:description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
+  <meta name="twitter:description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -74,41 +74,40 @@
               convolutional kernels.</p>
           </div> -->
 
-          <div class="card">
+          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
             <h3>Diagrammer</h3>
-
-
-            <div class="carousel" style="overflow-x: auto; white-space: nowrap; padding-bottom: 1rem;">
-              <img src="images/diagram1.png"
-                style="width: 400px; display: inline-block; margin-right: 10px; border-radius: 8px;">
-              <img src="images/diagram2.png"
-                style="width: 400px; display: inline-block; margin-right: 10px; border-radius: 8px;">
-              <img src="images/diagram3.png"
-                style="width: 400px; display: inline-block; margin-right: 10px; border-radius: 8px;">
-              <img src="images/diagram4.png"
-                style="width: 400px; display: inline-block; margin-right: 10px; border-radius: 8px;">
-              <img src="images/diagram5.png"
-                style="width: 400px; display: inline-block; margin-right: 10px; border-radius: 8px;">
+          
+            <!-- 图1：Swin vs ViT -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram1.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 1:</strong> Comparison of hierarchical Swin Transformer vs. flat ViT.</p>
+              <p>Unlike ViT which applies global attention at a fixed scale, Swin Transformer processes images in a hierarchical fashion—starting with small patches and gradually merging them. This enables Swin to support not only classification but also detection and segmentation.</p>
             </div>
-
-            <p>These diagrams illustrate the key ideas of the Swin Transformer:
-            <ul>
-              <li><strong>Fig 1:</strong> Compares Swin Transformer's hierarchical design with the flat architecture of
-                ViT.</li>
-              <li><strong>Fig 2:</strong> Shows how attention is computed in shifted windows to increase local
-                connectivity.</li>
-              <li><strong>Fig 3:</strong> Highlights how Swin processes images like traffic signs via patch partitioning
-                and merging.</li>
-              <li><strong>Fig 4:</strong>(a) The overall architecture of the Swin transformer (b) The two blocks of the
-                Swin transformer.</li>
-              <li><strong>Fig 5:</strong>The Swin Transformer architecture that yielded the best results after testing
-                in this project.</li>
-            </ul>
-            </p>
-
-            <p style="font-size: small; color: gray;">Figures from Liu et al., 2021, ICCV: "Swin Transformer:
-              Hierarchical Vision Transformer using Shifted Windows".</p>
+          
+            <!-- 图2：Shifted Window Attention -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram2.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 2:</strong> Shifted window self-attention across layers.</p>
+              <p>Swin Transformer performs local attention within windows in one layer, and then shifts the windows in the next. This allows information exchange between neighboring regions while keeping the computation efficient.</p>
+            </div>
+          
+            <!-- 图3：Patch Partitioning & Merging -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram3.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 3:</strong> Patch partition and merging across stages.</p>
+              <p>The model begins by partitioning the image into small patches and applies a linear embedding. As it progresses through the stages, patches are merged and representations are updated hierarchically, mimicking a CNN-like resolution pyramid.</p>
+            </div>
+          
+            <!-- 图4：Swin Block Architecture -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram4.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 4:</strong> Inner workings of a Swin Transformer Block.</p>
+              <p>Each block contains a Window-based Multi-head Self-Attention (W-MSA) and a Shifted Window MSA (SW-MSA), combined with Layer Normalization and MLP layers. This design enables both efficiency and local-global context capture.</p>
+            </div>
+          
+            <p style="font-size: small; color: gray;">Figures based on Liu et al., 2021 (ICCV): "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows".</p>
           </div>
+          
 
           <!-- Reviewer -->
           <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
@@ -144,12 +143,69 @@
 
           <!-- Experimenter -->
           <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
-            <h3>Experimenter</h3>
-            <img src="images/gtsrb_comparison.png" alt="GTSRB Results"
-              style="width: 100%; border-radius: 8px; margin: 1rem 0;">
+            <h3>Experiment</h3>
+            <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem; margin-bottom: 2rem;">
+              <h3>Dataset: GTSRB</h3>
+            
+              <p>
+                The <strong>German Traffic Sign Recognition Benchmark (GTSRB)</strong> is a widely-used dataset for multi-class image classification,
+                designed for developing and evaluating traffic sign recognition models. It contains over <strong>50,000 images</strong> covering
+                <strong>43 traffic sign classes</strong>, with variations in scale, lighting, rotation, and occlusion—making it a challenging benchmark for real-world vision systems.
+              </p>
+            
+              <ul>
+                <li><strong>Image count:</strong> 51,839</li>
+                <li><strong>Classes:</strong> 43 different traffic signs</li>
+                <li><strong>Image size:</strong> Varies, mostly resized to 32×32 or 64×64 in preprocessing</li>
+                <li><strong>Applications:</strong> Used in autonomous driving, traffic sign recognition, visual robustness testing</li>
+              </ul>
+            
+              <div style="text-align: center; margin-top: 1rem;">
+                <img src="images/dataset.png" alt="GTSRB sample" style="max-width: 100%; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+                <p style="font-size: 0.9rem; color: gray;">Figure: Sample images from the GTSRB dataset showing various traffic signs under different lighting and angles.</p>
+              </div>
+            </div>
+            
+
+
+
+
             <p>We implemented Swin-Tiny and ResNet-50 on the GTSRB dataset under the same conditions. The Swin
               Transformer outperformed ResNet in accuracy and convergence. We also investigated how changing the Swin
               window size affects model performance, with surprising insights on pattern sensitivity.</p>
+            <img src="images/training results_swintrans.png" alt="GTSRB Results"
+              style="width: 100%; border-radius: 8px; margin: 1rem 0;">
+
+              <div style="margin-bottom: 2rem;">
+                <h4>Accuracy Comparison</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                  <div style="flex: 1;">
+                    <img src="images/Accuracy of CNN.png" alt="CNN Accuracy" style="width: 100%; border-radius: 8px;">
+                    <p style="font-size: 0.9rem;">Training and validation accuracy of ResNet-50 (CNN). It shows fast convergence and high validation accuracy approaching 99% after just a few epochs.</p>
+                  </div>
+                  <div style="flex: 1;">
+                    <img src="images/Accuracy of Swin-Transformer.png" alt="Swin Transformer Accuracy" style="width: 100%; border-radius: 8px;">
+                    <p style="font-size: 0.9rem;">Accuracy curve of Swin Transformer shows stable improvements, reaching ~98.3% accuracy, with less variance after epoch 5. Suggests good generalization and robustness.</p>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Loss Comparison -->
+              <div style="margin-bottom: 2rem;">
+                <h4>Loss Comparison</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                  <div style="flex: 1;">
+                    <img src="images/Loss of CNN.jpg" alt="CNN Loss" style="width: 100%; border-radius: 8px;">
+                    <p style="font-size: 0.9rem;">Loss curves of ResNet-50 show consistent decline, and low validation loss after epoch 3, indicating strong fit to data with low overfitting risk.</p>
+                  </div>
+                  <div style="flex: 1;">
+                    <img src="images/Loss of Swin-Transformer.png" alt="Swin Transformer Loss" style="width: 100%; border-radius: 8px;">
+                    <p style="font-size: 0.9rem;">Loss curve of Swin Transformer also decreases steadily. While not as steep initially, it stabilizes well, suggesting a strong capacity for noise-tolerant optimization.</p>
+                  </div>
+                </div>
+              </div>
+            
+              <p>Overall, both models perform well, but Swin Transformer shows comparable or slightly better generalization ability. Its hierarchical architecture and shifted windows contribute to stable convergence with fewer parameters.</p>
           </div>
 
         </section>
@@ -165,7 +221,7 @@
 
         <h2>Team Members</h2>
 
-        <p>Zefeng Zhao $ Zuyu Guo.</p>
+        <p>Zefeng Zhao, Zuyu Guo.</p>
 
         <!-- Acknowledgment -->
         <h2>Acknowledgment</h2>
