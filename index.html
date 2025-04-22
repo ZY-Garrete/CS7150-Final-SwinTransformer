@@ -22,6 +22,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
     crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
   <link href="style.css" rel="stylesheet">
 
@@ -41,12 +44,26 @@
     <div class="row">
       <div class="col justify-content-center text-center">
         <h2>An Analysis of "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows"</h2>
-        <p>This project investigates whether the Swin Transformer can outperform traditional CNNs like ResNet-50 in
-          real-world image classification tasks. Using the GTSRB traffic sign dataset, we evaluate both models under the
-          same training conditions to ensure a fair comparison. Our core question is whether vision transformers like
-          Swin provide tangible benefits over conventional architectures. Additionally, we explore how the size of the
-          attention window in Swin affects its performance, aiming to understand whether tuning this key parameter can
-          further enhance its ability to recognize complex visual patterns.</p>
+        <p>
+          The Swin Transformer paper introduces a powerful and scalable vision architecture that extends the success of
+          transformers to a wide range of computer vision tasks.
+          Unlike standard Vision Transformers (ViT), which use global self-attention, Swin employs a hierarchical design
+          with non-overlapping windows, making it more computationally efficient.
+          The key innovation lies in the <strong>shifted window mechanism</strong>, which allows cross-window
+          connections and improves information flow across local regions.
+        </p>
+        <p>
+          The architecture progresses through four stages, gradually reducing spatial dimensions via <strong>Patch
+            Merging</strong> and increasing the number of channels—mirroring the design philosophy of CNNs.
+          This allows the model to capture fine-grained features in earlier stages and more abstract representations in
+          deeper layers.
+        </p>
+        <p>
+          The paper demonstrates strong results on benchmark datasets in image classification, object detection, and
+          semantic segmentation, showing the Swin Transformer’s potential as a general-purpose backbone.
+          Its modular nature and competitive performance suggest a promising alternative to traditional convolutional
+          networks.
+        </p>
       </div>
     </div>
     <div class="row">
@@ -68,13 +85,6 @@
                 Focus: Vision, Hierarchical Modeling
               </div>
 
-              <!-- Yutong Lin -->
-              <div style="width: 220px; text-align: center;">
-                <strong>Yutong Lin</strong><br>
-                MSRA<br>
-                Focus: Efficient Visual Learning
-              </div>
-
               <!-- Han Hu -->
               <div style="width: 220px; text-align: center;">
                 <img src="images/han_hu.jpg" alt="Han Hu"
@@ -91,6 +101,13 @@
                 <strong>Yue Cao</strong><br>
                 MSRA<br>
                 Focus: Vision Research Leadership
+              </div>
+
+              <!-- Yutong Lin -->
+              <div style="width: 220px; text-align: center;">
+                <strong>Yutong Lin</strong><br>
+                MSRA<br>
+                Focus: Efficient Visual Learning
               </div>
             </div>
 
@@ -133,8 +150,8 @@
                 efficient.</p>
             </div>
 
-            <!-- image3：Patch Partitioning & Merging -->
-            <div style="margin-bottom: 2rem;">
+            <!-- image3：The overall architecture of the Swin transformer -->
+            <!-- <div style="margin-bottom: 2rem;">
               <img src="images/diagram3.png" style="width: 100%; border-radius: 8px;">
               <p><strong>Figure 3:</strong> The overall architecture of the Swin transformer.</p>
               <p>The model adopts a hierarchical design with four stages in total. Except for the first stage, each
@@ -142,7 +159,7 @@
                 resolution. This allows the model to progressively enlarge the receptive field—similar to how CNNs
                 operate—enabling it to capture increasingly global information.</p>
               <p>
-                At the beginning of the model, a <strong>Patch Partition</strong> operation is applied—this is
+                At the beginning of the model, a <strong>Patch Partition</strong> operation is applied-this is
                 equivalent to the <strong>Patch Embedding</strong> in ViT. The input image is split into non-overlapping
                 patches using a convolutional layer with a patch size of 4, and these patches are embedded into vectors
                 with a dimension of 48 (similar to how tokens are embedded in NLP). In the first stage, a <strong>Linear
@@ -155,6 +172,82 @@
                   Perceptron (MLP)</strong>.
               </p>
 
+            </div> -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram3.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 3:</strong> The overall architecture of the Swin Transformer.</p>
+
+              <p>
+                The model adopts a hierarchical design with four stages in total. Except for the first stage, each
+                subsequent stage begins with a
+                <strong>Patch Merging</strong> layer that downsamples the input feature map, reducing its resolution.
+                This allows the model to
+                progressively enlarge the receptive field—similar to how CNNs operate—enabling it to capture
+                increasingly global information.
+              </p>
+
+              <p>
+                At the beginning of the model, a <strong>Patch Partition</strong> operation is applied—this is
+                equivalent to the <strong>Patch Embedding</strong> in ViT.
+                The input image of size \( H \times W \times 3 \) is divided into non-overlapping patches of size \( 4
+                \times 4 \), producing
+                \( \frac{H}{4} \times \frac{W}{4} \) patches, each with a flattened vector of dimension \( 4 \times 4
+                \times 3 = 48 \).
+                Thus, the embedded feature sequence has shape:
+              </p>
+
+              <p style="margin-left: 1rem; font-family: 'Courier New', monospace;">
+                \( \mathbf{X}_0 \in \mathbb{R}^{\frac{H}{4} \cdot \frac{W}{4} \times 48} \)
+              </p>
+
+              <p>
+                In the first stage, a <strong>Linear Embedding</strong> layer projects these 48-dimensional vectors into
+                a hidden dimension \( C \), where:
+              </p>
+
+              <p style="margin-left: 1rem; font-family: 'Courier New', monospace;">
+                \( \mathbf{X}_1 = \mathbf{X}_0 \cdot \mathbf{W}_{\text{embed}} \in \mathbb{R}^{\frac{H}{4} \cdot
+                \frac{W}{4} \times C} \)
+              </p>
+
+              <p>
+                Each subsequent stage (except the first) starts with <strong>Patch Merging</strong>, which concatenates
+                features from a 2×2 region and applies a linear projection:
+              </p>
+
+              <p style="margin-left: 1rem; font-family: 'Courier New', monospace;">
+                \( \text{PatchMerging}(x) = \text{Linear}(\text{Concat}(x_{i,j}, x_{i,j+1}, x_{i+1,j}, x_{i+1,j+1})) \)
+              </p>
+
+              <p>
+                This reduces the resolution by a factor of 2 and doubles the channel dimension, producing a more
+                abstract and compact representation for deeper stages.
+              </p>
+
+              <p>
+                Inside each stage, several <strong>Swin Transformer Blocks</strong> are applied. As shown in the
+                diagram, each block contains:
+              </p>
+              <ul>
+                <li><strong>Layer Normalization</strong> before each major operation</li>
+                <li><strong>Window-based Multi-head Self-Attention (W-MSA)</strong> computing attention within
+                  non-overlapping windows</li>
+                <li><strong>Shifted Window Attention (SW-MSA)</strong> to enable cross-window connections</li>
+                <li><strong>Multilayer Perceptron (MLP)</strong> with two linear layers and a GELU activation</li>
+              </ul>
+
+              <p>
+                The W-MSA and SW-MSA operations can be formally described as:
+              </p>
+
+              <p style="margin-left: 1rem; font-family: 'Courier New', monospace;">
+                \( \text{Attention}(Q, K, V) = \text{Softmax}\left( \frac{QK^\top}{\sqrt{d}} \right)V \)
+              </p>
+
+              <p>
+                where \( Q, K, V \) are linear projections of the input \( X \) within each window and \( d \) is the
+                dimensionality of the keys.
+              </p>
             </div>
 
             <!-- image4：Swin Block Architecture -->
@@ -211,6 +304,30 @@
                       return x
               </code></pre>
 
+            </div>
+
+            <!-- image5：CNNss Architecture -->
+            <div style="margin-bottom: 2rem;">
+              <img src="images/diagram5.png" style="width: 100%; border-radius: 8px;">
+              <p><strong>Figure 5:</strong> The overall architecture of the CNNs.</p>
+              <p>
+                We implemented a Convolutional Neural Network (CNN) to classify traffic signs into 43 categories using
+                the GTSRB dataset.
+                The input is a 32×32 RGB image passed through five convolutional stages. Each stage uses 3×3 filters,
+                ReLU activation, batch normalization,
+                and dropout (25%) to prevent overfitting. Max pooling is applied to reduce spatial dimensions,
+                eventually down to 4×4.
+              </p>
+              <p>
+                After feature extraction, the output is flattened and passed through a fully connected layer with 128
+                units and 50% dropout.
+                The final layer outputs a 43-dimensional vector, transformed into class probabilities using softmax.
+              </p>
+              <p>
+                The model was trained for 15 epochs with a batch size of 32. It combines strong feature extraction,
+                dimensionality reduction, and regularization,
+                making it well-suited for robust traffic sign recognition.
+              </p>
             </div>
 
             <p style="font-size: small; color: gray;">Figures based on Liu et al., 2021 (ICCV): "Swin Transformer:
