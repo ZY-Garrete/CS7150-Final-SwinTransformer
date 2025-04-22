@@ -3,11 +3,13 @@
 
 <head>
   <title>A Comparative Study of CNNs and Swin Transformers on Traffic Sign Classification</title>
-  <meta property="og:title" content=  Swin vs CNNs Transformers on Traffic Signs" />
+  <meta property="og:title" content=Swin vs CNNs Transformers on Traffic Signs" />
   <meta name="twitter:title" content="  Swin vs CNNs Transformers on Traffic Signs" />
   <meta name="description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
-  <meta property="og:description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
-  <meta name="twitter:description" content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
+  <meta property="og:description"
+    content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
+  <meta name="twitter:description"
+    content="Comparative study of Swin Transformers and CNNs using GTSRB dataset for CS7150." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -53,15 +55,51 @@
         <section id="analysis-section" style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem;">
 
           <!-- Private Investigator -->
-          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
+          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1.5rem;">
             <h3>Private Investigator</h3>
-            <img src="images/ze_liu.png" alt="Ze Liu" style="width: 200px; border-radius: 8px; margin: 1rem 0;">
-            <p><strong>Ze Liu</strong><br>
-              Researcher at Microsoft Research Asia (MSRA)<br>
-              Focus: Visual Representation Learning, Hierarchical Modeling</p>
-            <p>Swin Transformer was proposed by a group of leading researchers at MSRA. Their goal was to design a
-              general-purpose hierarchical vision transformer that can scale effectively across classification,
-              detection, and segmentation tasks. The baseline CNN, ResNet, was also originally developed at MSRA.</p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-around;">
+              <!-- Ze Liu -->
+              <div style="width: 220px; text-align: center;">
+                <img src="images/ze_liu.png" alt="Ze Liu"
+                  style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+                <strong>Ze Liu</strong><br>
+                Microsoft Research Asia (MSRA)<br>
+                Focus: Vision, Hierarchical Modeling
+              </div>
+
+              <!-- Yutong Lin -->
+              <div style="width: 220px; text-align: center;">
+                <strong>Yutong Lin</strong><br>
+                MSRA<br>
+                Focus: Efficient Visual Learning
+              </div>
+
+              <!-- Han Hu -->
+              <div style="width: 220px; text-align: center;">
+                <img src="images/han_hu.jpg" alt="Han Hu"
+                  style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+                <strong>Han Hu</strong><br>
+                MSRA<br>
+                Focus: 3D Vision, Transformers
+              </div>
+
+              <!-- yue_cao -->
+              <div style="width: 220px; text-align: center;">
+                <img src="images/yue_cao.jpg" alt="yue_cao"
+                  style="width: 100%; border-radius: 8px; margin-bottom: 0.5rem;">
+                <strong>Yue Cao</strong><br>
+                MSRA<br>
+                Focus: Vision Research Leadership
+              </div>
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+              Swin Transformer was proposed by a group of leading researchers at Microsoft Research Asia (MSRA).
+              Their goal was to design a general-purpose hierarchical vision transformer that scales effectively across
+              classification, detection, and segmentation tasks. The baseline CNN, ResNet, was also originally developed
+              at MSRA.
+            </p>
           </div>
 
           <!-- Diagrammer -->
@@ -76,41 +114,112 @@
 
           <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
             <h3>Diagrammer</h3>
-          
-            <!-- 图1：Swin vs ViT -->
+
+            <!-- image1：Swin vs ViT -->
             <div style="margin-bottom: 2rem;">
               <img src="images/diagram1.png" style="width: 100%; border-radius: 8px;">
               <p><strong>Figure 1:</strong> Comparison of hierarchical Swin Transformer vs. flat ViT.</p>
-              <p>Unlike ViT which applies global attention at a fixed scale, Swin Transformer processes images in a hierarchical fashion—starting with small patches and gradually merging them. This enables Swin to support not only classification but also detection and segmentation.</p>
+              <p>Unlike ViT which applies global attention at a fixed scale, Swin Transformer processes images in a
+                hierarchical fashion—starting with small patches and gradually merging them. This enables Swin to
+                support not only classification but also detection and segmentation.</p>
             </div>
-          
-            <!-- 图2：Shifted Window Attention -->
+
+            <!-- image2：Shifted Window Attention -->
             <div style="margin-bottom: 2rem;">
               <img src="images/diagram2.png" style="width: 100%; border-radius: 8px;">
               <p><strong>Figure 2:</strong> Shifted window self-attention across layers.</p>
-              <p>Swin Transformer performs local attention within windows in one layer, and then shifts the windows in the next. This allows information exchange between neighboring regions while keeping the computation efficient.</p>
+              <p>Swin Transformer performs local attention within windows in one layer, and then shifts the windows in
+                the next. This allows information exchange between neighboring regions while keeping the computation
+                efficient.</p>
             </div>
-          
-            <!-- 图3：Patch Partitioning & Merging -->
+
+            <!-- image3：Patch Partitioning & Merging -->
             <div style="margin-bottom: 2rem;">
               <img src="images/diagram3.png" style="width: 100%; border-radius: 8px;">
-              <p><strong>Figure 3:</strong> Patch partition and merging across stages.</p>
-              <p>The model begins by partitioning the image into small patches and applies a linear embedding. As it progresses through the stages, patches are merged and representations are updated hierarchically, mimicking a CNN-like resolution pyramid.</p>
+              <p><strong>Figure 3:</strong> The overall architecture of the Swin transformer.</p>
+              <p>The model adopts a hierarchical design with four stages in total. Except for the first stage, each
+                subsequent stage begins with a Patch Merging layer that downsamples the input feature map, reducing its
+                resolution. This allows the model to progressively enlarge the receptive field—similar to how CNNs
+                operate—enabling it to capture increasingly global information.</p>
+              <p>
+                At the beginning of the model, a <strong>Patch Partition</strong> operation is applied—this is
+                equivalent to the <strong>Patch Embedding</strong> in ViT. The input image is split into non-overlapping
+                patches using a convolutional layer with a patch size of 4, and these patches are embedded into vectors
+                with a dimension of 48 (similar to how tokens are embedded in NLP). In the first stage, a <strong>Linear
+                  Embedding</strong> layer adjusts the channel dimension to <strong>C</strong>. Each subsequent stage
+                (except the first) begins with a <strong>Patch Merging</strong> module, which downsamples the feature
+                map resolution, allowing the model to increase its receptive field like CNNs. Within each stage,
+                multiple <strong>Swin Transformer Blocks</strong> are applied. As shown in the diagram, each block
+                consists of <strong>Layer Normalization</strong>, <strong>Window-based Multi-Head Self-Attention
+                  (W-MSA)</strong>, <strong>Shifted Window Attention (SW-MSA)</strong>, and a <strong>Multilayer
+                  Perceptron (MLP)</strong>.
+              </p>
+
             </div>
-          
-            <!-- 图4：Swin Block Architecture -->
+
+            <!-- image4：Swin Block Architecture -->
             <div style="margin-bottom: 2rem;">
               <img src="images/diagram4.png" style="width: 100%; border-radius: 8px;">
-              <p><strong>Figure 4:</strong> Inner workings of a Swin Transformer Block.</p>
-              <p>Each block contains a Window-based Multi-head Self-Attention (W-MSA) and a Shifted Window MSA (SW-MSA), combined with Layer Normalization and MLP layers. This design enables both efficiency and local-global context capture.</p>
+              <p><strong>Figure 4:</strong> Understanding the framework from a code perspective.</p>
+              <p>
+                In the Swin Transformer architecture, <strong>Patch Merging</strong> is placed at the end of each stage.
+                The input first goes through a series of <strong>Swin Transformer Blocks</strong> for feature
+                extraction, followed by downsampling via Patch Merging. The final stage does not perform any further
+                downsampling. Instead, its output is passed directly to a fully connected layer, where it is used to
+                compute the loss against the target labels.
+              </p>
+              <pre><code class="language-python">
+              # window_size=7 
+              # input_batch_image.shape=[128,3,224,224]
+              class SwinTransformer(nn.Module):
+                  def __init__(...):
+                      super().__init__()
+                      ...
+                      # absolute position embedding
+                      if self.ape:
+                          self.absolute_pos_embed = nn.Parameter(torch.zeros(1, num_patches, embed_dim))
+              
+                      self.pos_drop = nn.Dropout(p=drop_rate)
+              
+                      # build layers
+                      self.layers = nn.ModuleList()
+                      for i_layer in range(self.num_layers):
+                          layer = BasicLayer(...)
+                          self.layers.append(layer)
+              
+                      self.norm = norm_layer(self.num_features)
+                      self.avgpool = nn.AdaptiveAvgPool1d(1)
+                      self.head = nn.Linear(self.num_features, num_classes) if num_classes > 0 else nn.Identity()
+              
+                  def forward_features(self, x):
+                      x = self.patch_embed(x) # Patch Partition
+                      if self.ape:
+                          x = x + self.absolute_pos_embed
+                      x = self.pos_drop(x)
+              
+                      for layer in self.layers:
+                          x = layer(x)
+              
+                      x = self.norm(x)  # Batch_size Windows_num Channels
+                      x = self.avgpool(x.transpose(1, 2))  # Batch_size Channels 1
+                      x = torch.flatten(x, 1)
+                      return x
+              
+                  def forward(self, x):
+                      x = self.forward_features(x)
+                      x = self.head(x) # self.head => Linear(in=Channels,out=Classification_num)
+                      return x
+              </code></pre>
+
             </div>
-          
-            <p style="font-size: small; color: gray;">Figures based on Liu et al., 2021 (ICCV): "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows".</p>
+
+            <p style="font-size: small; color: gray;">Figures based on Liu et al., 2021 (ICCV): "Swin Transformer:
+              Hierarchical Vision Transformer using Shifted Windows".</p>
           </div>
-          
+
 
           <!-- Reviewer -->
-          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
+          <!-- <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
             <h3>Reviewer</h3>
 
             <p><strong>Review Score:</strong> <span style="font-weight: bold; font-size: 1.1rem;">7/10 Accept</span></p>
@@ -139,33 +248,83 @@
               <li>Swin may not feel highly innovative compared to other vision architectures.</li>
               <li>Lacks theoretical justification for shift size or merging patterns.</li>
             </ul>
+          </div> -->
+          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
+            <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Reviewer Comments</h3>
+
+            <p><strong>Overall Recommendation:</strong>
+              <span style="font-weight: bold; font-size: 1.15rem; color: #006400;">Accept (7/10)</span>
+            </p>
+
+            <p style="font-style: italic; margin-bottom: 1.5rem;">
+              Swin Transformer presents a unified and scalable vision backbone, designed around hierarchical modeling
+              and
+              computationally efficient window-based self-attention.
+            </p>
+
+            <h4 style="margin: 1rem 0 0.3rem;">Strengths</h4>
+            <ul style="padding-left: 1.2rem; margin-top: 0;">
+              <li>
+                <strong>Shifted Window Attention</strong> offers a clever balance between local and global context
+                modeling,
+                dramatically improving efficiency without sacrificing accuracy.
+              </li>
+              <li>
+                Demonstrates <strong>state-of-the-art performance</strong> across diverse tasks—image classification,
+                object detection, and semantic segmentation.
+              </li>
+              <li>
+                The architecture is <strong>modular and extensible</strong>, making it well-suited for future
+                advancements in
+                vision-based AI systems.
+              </li>
+            </ul>
+
+            <h4 style="margin: 1rem 0 0.3rem;">Weaknesses</h4>
+            <ul style="padding-left: 1.2rem; margin-top: 0;">
+              <li>
+                The paper lacks a <strong>deeper theoretical analysis</strong> of the shifted window strategy and its
+                limitations.
+              </li>
+              <li>
+                Compared to other emerging transformer variants, Swin's conceptual novelty might be perceived as more
+                incremental.
+              </li>
+            </ul>
           </div>
+
 
           <!-- Experimenter -->
           <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem;">
             <h3>Experiment</h3>
             <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1rem; margin-bottom: 2rem;">
               <h3>Dataset: GTSRB</h3>
-            
+
               <p>
-                The <strong>German Traffic Sign Recognition Benchmark (GTSRB)</strong> is a widely-used dataset for multi-class image classification,
-                designed for developing and evaluating traffic sign recognition models. It contains over <strong>50,000 images</strong> covering
-                <strong>43 traffic sign classes</strong>, with variations in scale, lighting, rotation, and occlusion—making it a challenging benchmark for real-world vision systems.
+                The <strong>German Traffic Sign Recognition Benchmark (GTSRB)</strong> is a widely-used dataset for
+                multi-class image classification,
+                designed for developing and evaluating traffic sign recognition models. It contains over <strong>50,000
+                  images</strong> covering
+                <strong>43 traffic sign classes</strong>, with variations in scale, lighting, rotation, and
+                occlusion—making it a challenging benchmark for real-world vision systems.
               </p>
-            
+
               <ul>
                 <li><strong>Image count:</strong> 51,839</li>
                 <li><strong>Classes:</strong> 43 different traffic signs</li>
                 <li><strong>Image size:</strong> Varies, mostly resized to 32*32 or 64*64 in preprocessing</li>
-                <li><strong>Applications:</strong> Used in autonomous driving, traffic sign recognition, visual robustness testing</li>
+                <li><strong>Applications:</strong> Used in autonomous driving, traffic sign recognition, visual
+                  robustness testing</li>
               </ul>
-            
+
               <div style="text-align: center; margin-top: 1rem;">
-                <img src="images/dataset.png" alt="GTSRB sample" style="max-width: 100%; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
-                <p style="font-size: 0.9rem; color: gray;">Figure: Sample images from the GTSRB dataset showing various traffic signs under different lighting and angles.</p>
+                <img src="images/dataset.png" alt="GTSRB sample"
+                  style="max-width: 100%; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+                <p style="font-size: 0.9rem; color: gray;">Figure: Sample images from the GTSRB dataset showing various
+                  traffic signs under different lighting and angles.</p>
               </div>
             </div>
-            
+
 
 
 
@@ -176,36 +335,45 @@
             <img src="images/training results_swintrans.png" alt="GTSRB Results"
               style="width: 100%; border-radius: 8px; margin: 1rem 0;">
 
-              <div style="margin-bottom: 2rem;">
-                <h4>Accuracy Comparison</h4>
-                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                  <div style="flex: 1;">
-                    <img src="images/Accuracy of CNN.png" alt="CNN Accuracy" style="width: 100%; border-radius: 8px;">
-                    <p style="font-size: 0.9rem;">Training and validation accuracy of ResNet-50 (CNN). It shows fast convergence and high validation accuracy approaching 97% after just a few epochs.</p>
-                  </div>
-                  <div style="flex: 1;">
-                    <img src="images/Accuracy of Swin-Transformer.png" alt="Swin Transformer Accuracy" style="width: 100%; border-radius: 8px;">
-                    <p style="font-size: 0.9rem;">Accuracy curve of Swin Transformer shows stable improvements, reaching ~98.3% accuracy, with less variance after epoch 5. Suggests good generalization and robustness.</p>
-                  </div>
+            <div style="margin-bottom: 2rem;">
+              <h4>Accuracy Comparison</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <div style="flex: 1;">
+                  <img src="images/Accuracy of CNN.png" alt="CNN Accuracy" style="width: 100%; border-radius: 8px;">
+                  <p style="font-size: 0.9rem;">Training and validation accuracy of ResNet-50 (CNN). It shows fast
+                    convergence and high validation accuracy approaching 97% after just a few epochs.</p>
+                </div>
+                <div style="flex: 1;">
+                  <img src="images/Accuracy of Swin-Transformer.png" alt="Swin Transformer Accuracy"
+                    style="width: 100%; border-radius: 8px;">
+                  <p style="font-size: 0.9rem;">Accuracy curve of Swin Transformer shows stable improvements, reaching
+                    ~98.3% accuracy, with less variance after epoch 5. Suggests good generalization and robustness.</p>
                 </div>
               </div>
-            
-              <!-- Loss Comparison -->
-              <div style="margin-bottom: 2rem;">
-                <h4>Loss Comparison</h4>
-                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                  <div style="flex: 1;">
-                    <img src="images/Loss of CNN.jpg" alt="CNN Loss" style="width: 100%; border-radius: 8px;">
-                    <p style="font-size: 0.9rem;">Loss curves of ResNet-50 show consistent decline, and low validation loss after epoch 3, indicating strong fit to data with low overfitting risk.</p>
-                  </div>
-                  <div style="flex: 1;">
-                    <img src="images/Loss of Swin-Transformer.png" alt="Swin Transformer Loss" style="width: 100%; border-radius: 8px;">
-                    <p style="font-size: 0.9rem;">Loss curve of Swin Transformer also decreases steadily. While not as steep initially, it stabilizes well, suggesting a strong capacity for noise-tolerant optimization.</p>
-                  </div>
+            </div>
+
+            <!-- Loss Comparison -->
+            <div style="margin-bottom: 2rem;">
+              <h4>Loss Comparison</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <div style="flex: 1;">
+                  <img src="images/Loss of CNN.jpg" alt="CNN Loss" style="width: 100%; border-radius: 8px;">
+                  <p style="font-size: 0.9rem;">Loss curves of ResNet-50 show consistent decline, and low validation
+                    loss after epoch 3, indicating strong fit to data with low overfitting risk.</p>
+                </div>
+                <div style="flex: 1;">
+                  <img src="images/Loss of Swin-Transformer.png" alt="Swin Transformer Loss"
+                    style="width: 100%; border-radius: 8px;">
+                  <p style="font-size: 0.9rem;">Loss curve of Swin Transformer also decreases steadily. While not as
+                    steep initially, it stabilizes well, suggesting a strong capacity for noise-tolerant optimization.
+                  </p>
                 </div>
               </div>
-            
-              <p>Overall, both models perform well, but Swin Transformer shows comparable or slightly better generalization ability. Its hierarchical architecture and shifted windows contribute to stable convergence with fewer parameters.</p>
+            </div>
+
+            <p>Overall, both models perform well, but Swin Transformer shows comparable or slightly better
+              generalization ability. Its hierarchical architecture and shifted windows contribute to stable convergence
+              with fewer parameters.</p>
           </div>
 
         </section>
@@ -218,6 +386,28 @@
             In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), pp. 10012–10022.
           </a>
         </p>
+        <p><a name="bottou-1990">[2]</a>
+          <a href="https://arxiv.org/abs/2005.12872" target="_blank">
+            Carion, N., Massa, F., Synnaeve, G., Usunier, N., Kirillov, A., & Zagoruyko, S. (2020, August).
+            <em>End-to-end
+              object detection with transformers</em>. In European conference on computer vision (pp. 213-229). Cham:
+            Springer
+            International Publishing.
+          </a>
+        </p>
+        <p><a name="bottou-1990">[3]</a>
+          <a href="https://www.nature.com/articles/nature14539" target="_blank">
+            LeCun, Y., Bengio, Y., & Hinton, G. (2015). <em> Deep learning </em>. nature, 521(7553), 436-444.
+          </a>
+        </p>
+        <p><a name="bottou-1990">[4]</a>
+          <a href="https://arxiv.org/abs/1409.1556" target="_blank">
+            Simonyan, K., & Zisserman, A. (2014).<em> Very deep convolutional networks for large-scale image
+              recognition</em>.
+            arXiv preprint arXiv:1409.1556.
+          </a>
+        </p>
+
 
         <h2>Team Members</h2>
 
