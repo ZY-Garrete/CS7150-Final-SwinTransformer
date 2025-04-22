@@ -55,19 +55,19 @@
           The Swin Transformer paper introduces a powerful and scalable vision architecture that extends the success of
           transformers to a wide range of computer vision tasks.
           Unlike standard Vision Transformers (ViT), which use global self-attention, Swin employs a hierarchical design
-          with non-overlapping windows, making it more computationally efficient.
+          with non - overlapping windows, making it more computationally efficient.
           The key innovation lies in the <strong>shifted window mechanism</strong>, which allows cross-window
           connections and improves information flow across local regions.
         </p>
         <p>
           The architecture progresses through four stages, gradually reducing spatial dimensions via <strong>Patch
-            Merging</strong> and increasing the number of channels—mirroring the design philosophy of CNNs.
+            Merging</strong> and increasing the number of channels - mirroring the design philosophy of CNNs.
           This allows the model to capture fine-grained features in earlier stages and more abstract representations in
           deeper layers.
         </p>
         <p>
           The paper demonstrates strong results on benchmark datasets in image classification, object detection, and
-          semantic segmentation, showing the Swin Transformer’s potential as a general-purpose backbone.
+          semantic segmentation, showing the Swin Transformer’s potential as a general - purpose backbone.
           Its modular nature and competitive performance suggest a promising alternative to traditional convolutional
           networks.
         </p>
@@ -320,10 +320,10 @@
               <p>
                 We implemented a Convolutional Neural Network (CNN) to classify traffic signs into 43 categories using
                 the GTSRB dataset.
-                The input is a 32×32 RGB image passed through five convolutional stages. Each stage uses 3×3 filters,
+                The input is a 32 * 32 RGB image passed through five convolutional stages. Each stage uses 3 * 3 filters,
                 ReLU activation, batch normalization,
                 and dropout (25%) to prevent overfitting. Max pooling is applied to reduce spatial dimensions,
-                eventually down to 4×4.
+                eventually down to 4 * 4.
               </p>
               <p>
                 After feature extraction, the output is flattened and passed through a fully connected layer with 128
