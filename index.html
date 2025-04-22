@@ -49,34 +49,40 @@
 
   <div class="container">
     <div class="row">
-      <div class="col justify-content-center text-center">
-        <h2>An Analysis of "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows"</h2>
-        <p>
-          The Swin Transformer paper introduces a powerful and scalable vision architecture that extends the success of
-          transformers to a wide range of computer vision tasks.
-          Unlike standard Vision Transformers (ViT), which use global self-attention, Swin employs a hierarchical design
-          with non - overlapping windows, making it more computationally efficient.
-          The key innovation lies in the <strong>shifted window mechanism</strong>, which allows cross-window
-          connections and improves information flow across local regions.
-        </p>
-        <p>
-          The architecture progresses through four stages, gradually reducing spatial dimensions via <strong>Patch
-            Merging</strong> and increasing the number of channels - mirroring the design philosophy of CNNs.
-          This allows the model to capture fine-grained features in earlier stages and more abstract representations in
-          deeper layers.
-        </p>
-        <p>
-          The paper demonstrates strong results on benchmark datasets in image classification, object detection, and
-          semantic segmentation, showing the Swin Transformer’s potential as a general - purpose backbone.
-          Its modular nature and competitive performance suggest a promising alternative to traditional convolutional
-          networks.
-        </p>
-      </div>
-    </div>
-    <div class="row">
       <div class="col">
 
         <section id="analysis-section" style="display: flex; flex-direction: column; gap: 2rem; padding: 2rem;">
+
+          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1.5rem;">
+            <div>
+              <h2>An Analysis of "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows"</h2>
+              <p>
+                The Swin Transformer paper introduces a powerful and scalable vision architecture that extends the
+                success of
+                transformers to a wide range of computer vision tasks.
+                Unlike standard Vision Transformers (ViT), which use global self-attention, Swin employs a hierarchical
+                design
+                with non-overlapping windows, making it more computationally efficient.
+                The key innovation lies in the <strong>shifted window mechanism</strong>, which allows cross-window
+                connections and improves information flow across local regions.
+              </p>
+              <p>
+                The architecture progresses through four stages, gradually reducing spatial dimensions via <strong>Patch
+                  Merging</strong> and increasing the number of channels—mirroring the design philosophy of CNNs.
+                This allows the model to capture fine-grained features in earlier stages and more abstract
+                representations in
+                deeper layers.
+              </p>
+              <p>
+                The paper demonstrates strong results on benchmark datasets in image classification, object detection,
+                and
+                semantic segmentation, showing the Swin Transformer’s potential as a general-purpose backbone.
+                Its modular nature and competitive performance suggest a promising alternative to traditional
+                convolutional
+                networks.
+              </p>
+            </div>
+          </div>
 
           <!-- Private Investigator -->
           <div style="border: 1px solid #ccc; border-radius: 12px; padding: 1.5rem;">
@@ -320,7 +326,8 @@
               <p>
                 We implemented a Convolutional Neural Network (CNN) to classify traffic signs into 43 categories using
                 the GTSRB dataset.
-                The input is a 32 * 32 RGB image passed through five convolutional stages. Each stage uses 3 * 3 filters,
+                The input is a 32 * 32 RGB image passed through five convolutional stages. Each stage uses 3 * 3
+                filters,
                 ReLU activation, batch normalization,
                 and dropout (25%) to prevent overfitting. Max pooling is applied to reduce spatial dimensions,
                 eventually down to 4 * 4.
@@ -507,13 +514,14 @@
                 link below:
               </p>
               <p>
-                 <a href="https://drive.google.com/file/d/1pLvKtfuMXS5sMzP_bIoDb4DWmycnvv9_/view?usp=sharing"
+                <a href="https://drive.google.com/file/d/1pLvKtfuMXS5sMzP_bIoDb4DWmycnvv9_/view?usp=sharing"
                   target="_blank" style="font-weight: bold; color: #007acc;">
                   Download Swin - Tranformer Weight file (.pth) [with top 1 accuracy reaches 98.3 %]
                 </a>
               </p>
               <p>
-                After downloading, you can place the `.pth` file in Swin - Transformer code part at project folder /Swin - Transformer - main / output and load it using PyTorch for
+                After downloading, you can place the `.pth` file in Swin - Transformer code part at project folder /Swin
+                - Transformer - main / output and load it using PyTorch for
                 inference or further training.
               </p>
             </div>
